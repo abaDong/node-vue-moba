@@ -4,8 +4,10 @@ import './plugins/element.js'
 import router from './router'
 
 Vue.config.productionTip = false
+import http from './http'
+Vue.productionTip.$http = http
 
 new Vue({
-  router,
-  render: h => h(App)
+    router,
+    render: h => h(App)
 }).$mount('#app')

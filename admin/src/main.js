@@ -5,7 +5,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 import http from './http'
-Vue.productionTip.$http = http
+Vue.prototype.$http = http
 
 new Vue({
     router,

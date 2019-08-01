@@ -3,22 +3,27 @@ module.exports = app => {
     const router = express.Router()
     const Category = require("../../models/Category")
 
+    //增
     router.post("/categories", async(req, res) => {
-        const model = await Category.create(req.body)
-        res.send(model);
-    })
+            const model = await Category.create(req.body)
+            res.send(model);
+        })
+        //改
     router.put("/categories/:id", async(req, res) => {
-        const model = await Category.findByIdAndUpdate(req.params.id, req.body)
-        res.send(model);
-    })
+            const model = await Category.findByIdAndUpdate(req.params.id, req.body)
+            res.send(model);
+        })
+        //删
     router.delete("/categories/:id", async(req, res) => {
-        const model = await Category.findByIdAndDelete(req.params.id, req.body)
-        res.send({ success: true });
-    })
+            const model = await Category.findByIdAndDelete(req.params.id, req.body)
+            res.send({ success: true });
+        })
+        //查
     router.get("/categories", async(req, res) => {
-        const items = await Category.find().limit(10)
-        res.send(items);
-    })
+            const items = await Category.find().populate("parent").limit(10)
+            res.send(items);
+        })
+        //查-详细
     router.get("/categories/:id", async(req, res) => {
         const model = await Category.findById(req.params.id)
         res.send(model);

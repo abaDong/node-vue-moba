@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.set('secret', 'abpswwww15633216181tsa1df6a')
+
 app.use(require("cors")())
 app.use(express.json())
 

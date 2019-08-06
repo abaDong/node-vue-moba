@@ -20,7 +20,41 @@
       </div>
     </div>
     <!-- 导航 end -->
-    <i class="iconfont icon-menu"></i>
+
+    <m-card icon="menu" title="新闻资讯">
+      <div class="nav flex-jc-around">
+        <div class="nav-item active">
+          <div class="nav-link">热门</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">公告</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">活动</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">赛事</div>
+        </div>
+      </div>
+      <div class="m-t-3">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="item in 5" :key="item">
+            <div class="py-2" v-for="item in 5" :key="item">
+              <span>[新闻]</span>
+              <span>|</span>
+              <span>some news</span>
+              <span>02/06</span>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </m-card>
+    <m-card icon="card-hero " title="英雄列表"></m-card>
+    <m-card icon="vedio" title="精彩视频"></m-card>
+    <m-card icon="Book" title="图文攻略"></m-card>
   </div>
 </template>
 

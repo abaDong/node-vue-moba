@@ -11,6 +11,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 // require styles
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
+import Card from './components/Card.vue';
+Vue.component('m-card', Card)
 
 new Vue({
     router,

@@ -3,7 +3,6 @@
     <swiper :options="swiperOption">
       <swiper-slide><img src="../assets/8fb39465b08fa0689fdf82ee29ef7dad.jpg" class="w-100"></swiper-slide>
       <swiper-slide><img src="../assets/2a25b6e6ed97e750f73e8e71afc6c74a.jpg" class="w-100"></swiper-slide>
-      <swiper-slide><img src="../assets/8fb39465b08fa0689fdf82ee29ef7dad.jpg" class="w-100"></swiper-slide>
       <div class="swiper-pagination pagination-home text-right px-3 py-2" slot="pagination"></div>
     </swiper>
     <!-- 轮播end -->
@@ -20,41 +19,21 @@
       </div>
     </div>
     <!-- 导航 end -->
+    <m-list-card icon="menu" title="新闻资讯" :categories="newsData">
+      <template #items="{category}">
+        <div class="py-2 flex flex-jc-between px-2" v-for="(news,i) in category.newsList" :key="i">
+          <div>
+            <span>[{{news.categoryName}}]</span>
+            <span class="px-2">|</span>
+            <span>{{news.title}}</span>
+          </div>
+          <div>
+            <span>{{news.date}}</span>
+          </div>
+        </div>
+      </template>
 
-    <m-card icon="menu" title="新闻资讯">
-      <div class="nav flex-jc-around">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">公告</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">活动</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">赛事</div>
-        </div>
-      </div>
-      <div class="m-t-3">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="item in 5" :key="item">
-            <div class="py-2" v-for="item in 5" :key="item">
-              <span>[新闻]</span>
-              <span>|</span>
-              <span>some news</span>
-              <span>02/06</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </m-card>
-    <m-card icon="card-hero " title="英雄列表"></m-card>
-    <m-card icon="vedio" title="精彩视频"></m-card>
-    <m-card icon="Book" title="图文攻略"></m-card>
+    </m-list-card>
   </div>
 </template>
 
@@ -69,7 +48,49 @@ export default {
         pagination: {
           el: ".pagination-home"
         }
-      }
+      },
+      newsData: [
+        {
+          name: "热门",
+          newsList: new Array(5).fill({}).map(v => ({
+            categoryName: "公告",
+            title: "某月某日全服不停机更新公告",
+            date: "06/22"
+          }))
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill({}).map(v => ({
+            categoryName: "新闻",
+            title: "某月某日全服不停机更新公告",
+            date: "06/22"
+          }))
+        },
+        {
+          name: "活动",
+          newsList: new Array(5).fill({}).map(v => ({
+            categoryName: "活动",
+            title: "某月某日全服不停机更新公告",
+            date: "06/22"
+          }))
+        },
+        {
+          name: "热门",
+          newsList: new Array(5).fill({}).map(v => ({
+            categoryName: "公新闻告",
+            title: "某月某日全服不停机更新公告",
+            date: "06/22"
+          }))
+        },
+        {
+          name: "热门",
+          newsList: new Array(5).fill({}).map(v => ({
+            categoryName: "公新闻告",
+            title: "某月某日全服不停机更新公告",
+            date: "06/22"
+          }))
+        }
+      ]
     };
   }
 };

@@ -4,6 +4,7 @@ import App from './App.vue'
 Vue.config.productionTip = false
 
 import './assets/scss/style.scss'
+import './assets/iconfont/iconfont.css'
 import router from './router'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'

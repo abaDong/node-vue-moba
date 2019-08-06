@@ -21,24 +21,40 @@
     <!-- 导航 end -->
     <m-list-card icon="menu" title="新闻资讯" :categories="newsData">
       <template #items="{category}">
-        <div class="py-2 flex flex-jc-between px-2" v-for="(news,i) in category.newsList" :key="i">
-          <div>
-            <span>[{{news.categoryName}}]</span>
-            <span class="px-2">|</span>
-            <span>{{news.title}}</span>
-          </div>
-          <div>
-            <span>{{news.date}}</span>
+        <routerLink tag="div" :to="`/articles/${news._id}`" class="py-2 fs-lg flex" v-for="(news,i) in category.newsList" :key="i">
+          <span class="text-info">[{{news.categoryName}}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark test-ellipsis p-r-4">{{news.title}}</span>
+          <span class="text-grey fs-sm">{{news.createdAt|date}}</span>
+        </routerLink>
+      </template>
+    </m-list-card>
+
+    <m-list-card icon="card-hero" title="英雄列表" :categories="heroData">
+      <template #items="{category}">
+        <div class="flex flex-wrap">
+          <div class="p-2 text-center" style="width:20%" v-for="(hero,i) in category.heroesList" :key="i">
+            <img :src="hero.avatar" class="w-100">
+            <div>{{hero.name}}</div>
           </div>
         </div>
       </template>
-
     </m-list-card>
+
+    <m-list-card icon="card-hero" title="英雄列表" :categories="heroData"></m-list-card>
+    <m-list-card icon="card-hero" title="英雄列表" :categories="heroData"></m-list-card>
+    <m-list-card icon="card-hero" title="英雄列表" :categories="heroData"></m-list-card>
   </div>
 </template>
 
 <script>
+import dayjs from "dayjs";
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format("MM/DD");
+    }
+  },
   data() {
     return {
       swiperOption: {
@@ -49,49 +65,24 @@ export default {
           el: ".pagination-home"
         }
       },
-      newsData: [
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map(v => ({
-            categoryName: "公告",
-            title: "某月某日全服不停机更新公告",
-            date: "06/22"
-          }))
-        },
-        {
-          name: "新闻",
-          newsList: new Array(5).fill({}).map(v => ({
-            categoryName: "新闻",
-            title: "某月某日全服不停机更新公告",
-            date: "06/22"
-          }))
-        },
-        {
-          name: "活动",
-          newsList: new Array(5).fill({}).map(v => ({
-            categoryName: "活动",
-            title: "某月某日全服不停机更新公告",
-            date: "06/22"
-          }))
-        },
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map(v => ({
-            categoryName: "公新闻告",
-            title: "某月某日全服不停机更新公告",
-            date: "06/22"
-          }))
-        },
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map(v => ({
-            categoryName: "公新闻告",
-            title: "某月某日全服不停机更新公告",
-            date: "06/22"
-          }))
-        }
-      ]
+      newsData: [],
+      heroData: []
     };
+  },
+
+  methods: {
+    async fetchNewsList() {
+      const res = await this.$http.get("/news/list");
+      this.newsData = res.data;
+    },
+    async fetchHeroList() {
+      const res = await this.$http.get("/heroes/list");
+      this.heroData = res.data;
+    }
+  },
+  created() {
+    this.fetchNewsList();
+    this.fetchHeroList();
   }
 };
 </script>

@@ -56,6 +56,8 @@ module.exports = app => {
 
     })
 
+
+    //新闻列表
     router.get('/news/list', async(req, res) => {
         //不推荐
         // const parent = await Category.findOne({
@@ -103,6 +105,7 @@ module.exports = app => {
         res.send(cats);
     })
 
+    //英雄列表
     router.get('/heroes/list', async(req, res) => {
         const parent = await Category.findOne({
             name: "英雄分类"
@@ -127,6 +130,11 @@ module.exports = app => {
         })
 
         res.send(cats);
+    })
+
+    router.get('/heroes/:id', async(req, res) => {
+        const data = await Hero.findById(req.params.id).populate('categories').lean()
+        res.send(data);
     })
 
     router.get('/articles/:id', async(req, res) => {
